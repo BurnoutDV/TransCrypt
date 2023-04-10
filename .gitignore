@@ -1,0 +1,13 @@
+/hugging_api_key
+/transcrypt.db
+/TransCrypt.log
+/transcrypts.db
+/venv/**
+/model/**
+__pycache__/**
+.idea/**
+*.wav
+*.ogg
+*.aac
+*.flac
+*.txt
