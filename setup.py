@@ -35,7 +35,7 @@ setup(
     author='BurnoutDV',
     author_email='development@burnoutdv.com',
     packages=['TransCrypt'],
-    install_requires=['textual', 'whisper', 'torch', 'pydub'],
+    install_requires=['textual', 'openai-whisper', 'torch', 'pydub'],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Environment :: Console",

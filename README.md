@@ -30,7 +30,7 @@ There is a setup.py, that should get you started, but I noticed that PyAnnotate 
 
 *edit* i also just remember that you can totally not simply use `setup.py`because i have just thrown in code chunks and not made this a proper project. I will, i promise, that is simple busywork, thats actually something I can do without exerting my mind. Its late, sorry. *Delete this Alan as soon as the deed is done*
 
-You will always need a hugging face api key for the PyAnnotate Model which has to be placed in a plain text fail named `hugging_api_key`.
+You will always need a hugging face api key for the PyAnnotate Model which has to be placed in a plain text file named `hugging_api_key`.
 
 ### Bias
 

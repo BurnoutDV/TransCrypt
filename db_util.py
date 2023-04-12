@@ -32,6 +32,8 @@ logger = logging.getLogger(__name__)
 
 class CryptDB:
 
+    status_map = {0: "Unprocessed", 1: "Annotated", 2: "Transcribed", 3: "Done", -1: "Unknown"}
+
     def __init__(self, filepath: str, dummy=False):
         self.db = None
         self.cur = None

@@ -230,6 +230,27 @@ def piped_speakers(piped_list: list[dict]) -> list:
     return list(speakers)
 
 
+def shorten_left_pad(line: str, length: int, filler="..") -> str:
+    """
+    Simply shortens a string to a maximum length and adds some filler symbols to the left
+
+    eg. "longstring" becomes "..gstring"
+
+    :param str line: a string of arbritary length
+    :param int length: maximum length of the string
+    :param str filler: string that is added to the left
+    :rtype: str
+    :returns: the trimmed and padded string
+    """
+    if not line:  # just a fallback in case its actually Null or smth
+        return ""
+    if not isinstance(line, str):
+        line = str(line)  # am I not friendly, I do the string casting for you
+    if len(line) > length:
+        return filler + line[(length-len(filler)):]
+    return line
+
+
 if __name__ == "__main__":
     print("Testing functionality...")
     defo = """[ 00:00:01.240 -->  00:00:03.062] A SPEAKER_00

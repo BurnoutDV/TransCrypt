@@ -1,0 +1,40 @@
+.main_table {
+    width: 100%;
+    height: 100%;
+    align-vertical: top;
+}
+
+.main_container {
+    padding: 1 1 1 1;
+    align-vertical: top;
+}
+
+#DialogScreen {
+    grid-size: 2 5;
+    grid-columns: 15 45;
+    grid-rows: 1;
+    grid-gutter: 1 1;
+    width: auto;
+    max-width: 80;
+    height: auto;
+    max-height: 15;
+    border: double $background 80%;
+    align: center middle;
+    background: $surface 30%;
+    padding: 1 1;
+    margin: 5 0 0 10;
+}
+
+.grid_span2 {
+    column-span: 2;
+    align: center top;
+}
+
+.small_button {
+    padding: 1 1;
+    margin: 0 1 0 1;
+}
+
+ProjectMenu {
+    background: $primary 60%;
+}

@@ -153,7 +153,7 @@ def cli_process_db():
                                 content=each['transcribe']['text'],
                                 language=each['transcribe'].get('language', "un"))
             # TODO: delete file after processing and reference in db
-    backend.update_project(p_id, status=3)
+    backend.update_project(p_id, status=2)
 
 
 def continue_from_refined(project_id: int, temp_folder, language):
