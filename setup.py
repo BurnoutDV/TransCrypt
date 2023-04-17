@@ -20,13 +20,14 @@
 #
 # @license GPL-3.0-only <https://www.gnu.org/licenses/gpl-3.0.en.html>
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 with open("README.md", 'r') as f:
     long_description = f.read()
 
 setup(
-    name='TransCrypt',
+    name='burnoutdv-transcrypt',
+    py_modules=["transcrypt"],
     version='0.2',
     description='A bunch of scripts to use PyAnnotate and Whisper to transcribe meeting notes and similar stuff',
     long_description=long_description,
@@ -34,8 +35,11 @@ setup(
     python_requires=">=3.9",  # if not for a single random walrus operator it would probably work with 3.4 or so
     author='BurnoutDV',
     author_email='development@burnoutdv.com',
-    packages=['TransCrypt'],
+    packages=find_packages(exclude=["tests*"]),
     install_requires=['textual', 'openai-whisper', 'torch', 'pydub'],
+    entry_points={
+        "console_scripts": ["transcrypt=src.cli:cli"],
+    },
     classifiers=[
         "Development Status :: 4 - Beta",
         "Environment :: Console",

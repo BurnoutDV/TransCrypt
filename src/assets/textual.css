@@ -1,0 +1,75 @@
+/* Yellow: #FFCC3D*/
+/* Green: #1EF484*/
+.main_table {
+    width: 100%;
+    height: 100%;
+    align-vertical: top;
+}
+
+.main_container {
+    padding: 1 1 1 1;
+    align-vertical: top;
+}
+
+#DialogScreen {
+    grid-size: 2 6;
+    grid-columns: 15 45;
+
+    grid-gutter: 0 1;
+    width: 80;
+    height: 20;
+    content-align: left top;
+    box-sizing: content-box;
+    border: hkey #37141B;
+    padding: 1 1;
+    margin: 5 0 0 10;
+}
+
+.dialogue-danger {
+
+}
+
+.dialogue-info {
+    background: #05070D 70%;
+}
+
+.dialogue-info Input {
+    background: #10101E;
+    border: tall #37141B;
+    color: #808080;
+}
+
+.dialogue-info Label {
+    color: #5DF5FF;
+}
+
+.dialogue-info TextLog {
+    background: #0E0E18;
+    color: #54D2E8
+}
+
+.dialogue-info Button {
+    background: #5EF4FF;
+    color: black;
+}
+
+
+#DialogScreen Button, Input {
+    margin: 0 1 0 1;
+    height: 3;
+    width: auto;
+}
+
+.grid_span2 {
+    column-span: 2;
+    align: center top;
+}
+
+.translate-short {
+    height: 5;
+    width: auto;
+}
+
+ProjectMenu {
+    background: black 60%;
+}
