@@ -12,6 +12,7 @@ dependencies = [
     "openai-whisper>=1.1.10",
     "textual>=0.19.1",
     "pydub>=0.25.1",
+    "pyannote.audio"
 ]
 classifiers = [
     "Development Status :: 4 - Beta",

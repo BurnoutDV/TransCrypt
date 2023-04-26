@@ -32,6 +32,8 @@ There is a setup.py, that should get you started, but I noticed that PyAnnotate 
 
 You will always need a hugging face api key for the PyAnnotate Model which has to be placed in a plain text file named `hugging_api_key`.
 
+`pip install -qq https://github.com/pyannote/pyannote-audio/archive/refs/heads/develop.zip`
+
 ### Bias
 
 Whisper apparently was trained by sub titles of various public broadcasting institutes, those tend to have copyright info in the silence at the end or beginning, that problem is [known](https://github.com/openai/whisper/discussions/928) I took the liberty and compiled those biases into `dataset_bias.json` I am totally open for Pull Requests on that one.

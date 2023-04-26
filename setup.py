@@ -36,7 +36,7 @@ setup(
     author='BurnoutDV',
     author_email='development@burnoutdv.com',
     packages=find_packages(exclude=["tests*"]),
-    install_requires=['textual', 'openai-whisper', 'torch', 'pydub'],
+    install_requires=['textual', 'openai-whisper', 'torch', 'pydub', 'pyannote.audio'],
     entry_points={
         "console_scripts": ["transcrypt=src.cli:cli"],
     },
