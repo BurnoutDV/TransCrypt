@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-# Copyright 2021 by BurnoutDV, <development@burnoutdv.com>
+# Copyright 2023 by BurnoutDV, <development@burnoutdv.com>
 #
 # This file is part of TransCrypt.
 #
@@ -20,13 +20,14 @@
 # @license GPL-3.0-only <https://www.gnu.org/licenses/gpl-3.0.en.html>
 
 from textual.app import App, ComposeResult
-from textual.widgets import Footer, Button, Static, Label, DataTable, Input, TextLog
+from textual.widgets import Footer, Button, Static, Label, DataTable, Input, RichLog
 from textual.containers import Container, Horizontal, Grid
 from textual.screen import Screen
 
 from time import monotonic
 from db_util import CryptDB
 from util import shorten_left_pad
+from i18n import ROOi18nProvider
 
 
 class MAIN(Screen):
@@ -36,12 +37,14 @@ class MAIN(Screen):
 
     ]
 
+    def __init__(self, i18n: ROOi18nProvider):
+        super().__init__()
+        self.i18n = i18n
+
     def compose(self) -> ComposeResult:
         yield Container (
             DataTable(id="dt_projects", zebra_stripes=True, classes="main_table"),
         )
-        #table = self.query_one("#dt_projects")
-        #table.__setattr__("cursor_type", "row")
 
         yield Label("Bla Fasel", id="rand_text")
 
@@ -63,7 +66,7 @@ class MAIN(Screen):
         selected = ('uid', 'given_name', 'num_lines', 'num_speakers', 'status', 'last_change', 'file_path')
         shorten = {'file_path': 50, 'given_name': 24}
 
-        table.add_columns(*selected)
+        table.add_columns(*self.i18n.translate_tuple(selected))
         for row in projects:
             one_row = []
             for col in selected:
@@ -89,14 +92,15 @@ class MAIN(Screen):
         row_content = table.get_row_at(row)
         project_id = row_content[0]
         label.update(str(row) + " - " + str(row_content))
-        self.app.push_screen(ProjectMenu(project_id))
+        self.app.push_screen(ProjectMenu(project_id, self.i18n))
 
 
 class ProjectMenu(Screen):
 
-    def __init__(self, project_id):
+    def __init__(self, project_id, i18n: ROOi18nProvider):
         super().__init__()
         self.project_id = project_id
+        self.i18n = i18n
 
     def compose(self) -> ComposeResult:
         """
@@ -105,37 +109,35 @@ class ProjectMenu(Screen):
         generation von zeug
         short keys bringen direkt auf tab
         """
-        yield Grid(
-            Label("Summary of Project #", classes="grid_span2"),
-            Label("Given Name"),
-            Label(id="in_name"), #placeholder="Project Name"
-            Label("File Path"),
-            Horizontal(
-                Label("", id="in_path"),
-                Button("..", id="btn_relocate", classes="small_button")
-            ),
-            Label("Status"),
-            Label("", id="lbl_status"),
+        with Grid(id="DialogScreen", classes="dialogue-info"):
+            yield Label("Summary of Project #", classes="grid_span2")
+            yield Label(self.i18n.t("given_name"))
+            yield Input(id="in_name", placeholder="Project Name")
+            yield Label(self.i18n.t("file_path"))
+            with Horizontal():
+                yield Label("", id="in_path")
+                yield Button("..", id="btn_relocate", classes="small_button")
+            yield Label(self.i18n.t("status"))
+            yield Label("", id="lbl_status")
 
-            Horizontal(
-                Button("Apply", variant="primary", id="btn_apply", classes="small_button"),
-                Button("Cancel", variant="warning", id="btn_cancel", classes="small_button"),
-                classes="grid_span2"
-            ),
-            id="DialogScreen",
-            classes="dialogue-info"
-        )
-        yield TextLog(id="tl_translated", classes="grid_span2 translate-short")
+            with Horizontal(classes="grid_span2"):
+                yield RichLog(id="tl_translated", classes="grid_span2 translate-short")
+            with Horizontal(classes="grid_span2"):
+                yield Button(self.i18n.t("Apply"), variant="primary", id="btn_apply", classes="small_button")
+                yield Button(self.i18n.t("Cancel"), variant="warning", id="btn_cancel", classes="small_button")
 
     def on_mount(self) -> None:
         backend = CryptDB("transcrypts.db")
         project = backend.fetch_project(self.project_id)
         lines = backend.fetch_project_lines(self.project_id, 20)
         preview = ""
-        for each in lines:
-            preview += each['content'] + "\n"
+        if project.get('status', 0) > 1 and len(lines) > 0:
+            for each in lines:
+                preview += each['content'] + "\n"
+        else:
+            preview = self.i18n.t("No Preview available")
         backend.close()
-        self.query_one("#in_name").update(str(project['given_name']))
+        self.query_one("#in_name").value = str(project['given_name'])
         self.query_one("#in_path").update(str(project['file_path']))
         self.query_one("#lbl_status").update(CryptDB.status_map[project.get('status', -1)])
         self.query_one("#tl_translated").write(preview)
@@ -148,14 +150,18 @@ class ProjectMenu(Screen):
 class TCApp(App):
     """A Textual app to interface with the rest of TransCrypt"""
 
-    CSS_PATH = "./assets/textual.css"
+    CSS_PATH = "assets/textual.tcss"
     BINDINGS = [
-        ("d", "toggle_dark", "Toggle dark mode"),
-        ("escape", "graceful_exit", "Exit")
+        ("escape", "graceful_exit", "Exit"),
+        ("d", "toggle_dark", "Toggle dark mode")
     ]
     SCREENS = {
-        "main": MAIN()
+        "main": MAIN(ROOi18nProvider("src/assets/i18n.json"))
     }
+
+    def __init__(self):
+        self.i18n = ROOi18nProvider("src/assets/i18n.json")
+        super().__init__()
 
     def compose(self) -> ComposeResult:
         yield Footer()

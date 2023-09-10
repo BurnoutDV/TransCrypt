@@ -1,0 +1,20 @@
+{
+  "en": {
+    "uid": "UID",
+    "given_name": "Project",
+    "num_lines": "Lines",
+    "num_speakers": "# Speakers",
+    "status": "Status",
+    "last_change": "Last Change",
+    "file_path": "local path"
+  },
+  "de": {
+    "uid": "UID",
+    "given_name": "Projekt",
+    "num_lines": "Zeilen",
+    "num_speakers": "Sprecher",
+    "status": "Status",
+    "last_change": "geändert",
+    "file_path": "dateipfad"
+  }
+}

@@ -18,9 +18,9 @@
     grid-gutter: 0 1;
     width: 80;
     height: 20;
-    content-align: left top;
+    content-align: center middle;
     box-sizing: content-box;
-    border: hkey #37141B;
+    /* border: hkey #37141B;*/
     padding: 1 1;
     margin: 5 0 0 10;
 }
@@ -34,8 +34,8 @@
 }
 
 .dialogue-info Input {
-    background: #10101E;
-    border: tall #37141B;
+    /* background: #10101E;*/
+    /* border: tall #37141B;*/
     color: #808080;
 }
 
@@ -43,21 +43,22 @@
     color: #5DF5FF;
 }
 
-.dialogue-info TextLog {
-    background: #0E0E18;
-    color: #54D2E8
+.dialogue-info RichLog {
+    /* background: #0E0E18;*/
+    /* color: #54D2E8*/
 }
 
 .dialogue-info Button {
-    background: #5EF4FF;
-    color: black;
+    /* background: #5EF4FF;*/
+    /* color: black;*/
 }
 
 
 #DialogScreen Button, Input {
     margin: 0 1 0 1;
-    height: 3;
-    width: auto;
+    height: 1;
+    min-width: 0;
+    border: none;
 }
 
 .grid_span2 {

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-# Copyright 2021 by BurnoutDV, <development@burnoutdv.com>
+# Copyright 2023 by BurnoutDV, <development@burnoutdv.com>
 #
 # This file is part of TransCrypt.
 #
